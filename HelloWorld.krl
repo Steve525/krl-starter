@@ -23,8 +23,17 @@ ruleset HelloWorldApp {
     pre {
       queryOnUrl = page:url("query");
     }
-    if true then {
+    if queryOnUrl then {
+      
       notify("Hello", queryOnUrl) with sticky = true;
     }
+    notfired {
+      raise explicit event query_missing
+    }
+  }
+
+  rule query_missing {
+    select when web pageview url re#ktest.heroku.com#
+    notify("Hello", "Monkey") with sticky = true; 
   }
 }
