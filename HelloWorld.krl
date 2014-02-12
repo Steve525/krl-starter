@@ -2,7 +2,7 @@ ruleset HelloWorldApp {
   meta {
     name "Hello World"
     description <<
-      Hello World
+        Lab 3 for CS 462 @ BYU
     >>
     author "Steve Clarkson"
     logging off
@@ -21,19 +21,20 @@ ruleset HelloWorldApp {
   rule query_string_checker {
     select when web pageview url re#ktest.heroku.com#
     pre {
-      queryOnUrl = page:url("query");
+      queryString = page:url("query");
     }
-    if queryOnUrl then {
-      
-      notify("Hello", queryOnUrl) with sticky = true;
+    if (queryString eq "") then {
+      notify("Hello", "Monkey") with sticky = true;
     }
     notfired {
-      raise explicit event query_missing
+      raise explicit event query_found
     }
   }
 
-  rule query_missing {
-    select when web pageview url re#ktest.heroku.com#
-    notify("Hello", "Monkey") with sticky = true; 
+  rule query_found {
+    select when explicit query_found
+    {
+      notify("Hello", "Monkey") with sticky = true; 
+    }
   }
 }
