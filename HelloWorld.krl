@@ -18,4 +18,13 @@ ruleset HelloWorldApp {
       notify("Hello World", "Notification 2") with sticky = true;
     }
   }
+  rule query_string_checker {
+    select when web pageview url re#ktest.heroku.com#
+    pre {
+      queryOnUrl = page:url("query");
+    }
+    if true then {
+      notify("Hello", queryOnUrl) with sticky = true;
+    }
+  }
 }
