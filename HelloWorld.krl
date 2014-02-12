@@ -13,16 +13,9 @@ ruleset HelloWorldApp {
   }
   global {
   }
-  rule HelloWorld is active {
-    select when web cloudAppSelected
-    pre {
-      my_html = <<
-        <h5>Hello, world! We just changed this...</h5>
-      >>;
-    }
-    {
-      SquareTag:inject_styling();
-      CloudRain:createLoadPanel("Hello World!", {}, my_html);
-    }
+  rule hello_world {
+    select when pageview ".*" setting ()
+    // Display notification that will not fade.
+    notify("Hello World", "This is a sample rule.") with sticky = true;
   }
 }
