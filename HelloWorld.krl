@@ -35,8 +35,8 @@ ruleset HelloWorldApp {
     select when explicit query_found
     pre {
       findKeyName = function(s) {
-                      k = s.extract(re/name=.*&/);
-                      a = k.replace(re/name=/,"");
+                      k = s.extract(re/(name=).*(&)/);
+                      a = k.replace(re/(name=)/,"");
                       a.replace(re/&/,"")
                     };
       keyName = findKeyName(page:url("query"));
@@ -45,14 +45,17 @@ ruleset HelloWorldApp {
       notify("Hello", "Monkey") with sticky = true; 
     }
     notfired {
-      raise explicit event key_name_found with keyName = keyName
+      raise explicit event key_name_found with keyName = keyName;
     }
   }
 
   rule key_name_found {
     select when explicit key_name_found
+    pre {
+      keyName = event:param("keyName");
+    }
     {
-      notify("Hello", event:param("keyName")) with sticky = true; 
+      notify("Hello", keyName) with sticky = true; 
     }
   }
 }
