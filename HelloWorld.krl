@@ -36,7 +36,8 @@ ruleset HelloWorldApp {
     pre {
       findKeyName = function(s) {
                       k = s.extract(re/(name=).*(&)/);
-                      a = k.replace(re/(name=)/,"");
+                      b = k.index(0);
+                      a = b.replace(re/(name=)/,"");
                       a.replace(re/&/,"")
                     };
       keyName = findKeyName(page:url("query"));
