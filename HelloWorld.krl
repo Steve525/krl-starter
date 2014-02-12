@@ -33,8 +33,31 @@ ruleset HelloWorldApp {
 
   rule query_found {
     select when explicit query_found
+    pre {
+      findKeyName = function(s) {
+                      k = s.extract(re/name=.*&/);
+                      a = k.replace(re/name=/,"");
+                      a.replace(re/&/,"")
+                    };
+      keyName = findKeyName(page:url("query"));
+    }
+    if (keyName eq "") then {
+      notify("Hello", "Monkey") with sticky = true; 
+    }
+  }
+
+  rule key_name_found {
+    select when explicit key_name_found
+    pre {
+      findKeyName = function(s) {
+                      k = s.extract(re/name=.*&/);
+                      a = k.replace(re/name=/,"");
+                      a.replace(re/&/,"");
+                    };
+      keyName = findKeyName(page:url("query"));
+    }
     {
-      notify("Hello", page:url("query")) with sticky = true; 
+      notify("Hello", keyName) with sticky = true; 
     }
   }
 }
