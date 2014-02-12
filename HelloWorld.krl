@@ -12,9 +12,10 @@ ruleset HelloWorldApp {
   global {
   }
   rule hello_world {
-    select when pageview ".*" setting ()
-    // Display notification that will not fade.
-    notify("Hello World", "Notification 1") with sticky = true;
-    notify("Hello World", "Notification 2") with sticky = true;
+    select when pageview
+    if event:attr("url").match(#ktest.heroku.com#) then every {
+      notify("Hello World", "Notification 1") with sticky = true;
+      notify("Hello World", "Notification 2") with sticky = true;
+    }
   }
 }
