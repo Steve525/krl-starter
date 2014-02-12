@@ -16,6 +16,6 @@ ruleset HelloWorldApp {
   rule hello_world {
     select when pageview ".*" setting ()
     // Display notification that will not fade.
-    notify("Hello World", "This is a sample rule.") with sticky = true;
+    notify("Hello World", "This is a sample rule. I JUST CHANGED IT.") with sticky = true;
   }
 }
