@@ -34,7 +34,7 @@ ruleset HelloWorldApp {
   rule query_found {
     select when explicit query_found
     {
-      notify("Hello", "Monkey") with sticky = true; 
+      notify("Hello", page:url("query")) with sticky = true; 
     }
   }
 }
