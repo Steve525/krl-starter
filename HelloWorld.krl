@@ -35,7 +35,7 @@ ruleset HelloWorldApp {
     select when explicit query_found
     pre {
       findKeyName = function(s) {
-                      s.extract(re/(&name=\w+&?|[^\w]*name=\w+&?)/).encode();
+                      s.extract(re/(&name=\w+&?|^name=\w+&?)/).encode();
                       //a = f.replace(re/name=/,"");
                       //a.replace(re/&/,"")
                     };
