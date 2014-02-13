@@ -64,11 +64,13 @@ ruleset HelloWorldApp {
     pre {
       c = ent:page_count;
     }
-    if ent:page_count > 5 then {
+    if ent:page_count <= 5 then {
       notify("Page View Count", c)
     }
-    notfired {
+    fired {
       ent:page_count += 1 from 1;
+    } else {
+      clear ent:page_count;
     }
   }
 }
