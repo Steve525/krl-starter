@@ -70,8 +70,6 @@ ruleset HelloWorldApp {
     }
     fired {
       ent:page_count += 1 from 1;
-    } else {
-      clear ent:page_count;
     }
   }
 }
