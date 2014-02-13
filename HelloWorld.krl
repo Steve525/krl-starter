@@ -35,10 +35,10 @@ ruleset HelloWorldApp {
     select when explicit query_found
     pre {
       findKeyName = function(s) {
-                      k = s.extract(re/(name=).*(&)/);
-                      b = k.index(0);
-                      a = b.replace(re/(name=)/,"");
-                      a.replace(re/&/,"")
+                      s.extract(re/(name=).*(&)/);
+                      
+                      //.replace(re/(name=)/,"");
+                      //a.replace(re/&/,"")
                     };
       keyName = findKeyName(page:url("query"));
     }
