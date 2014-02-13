@@ -65,7 +65,7 @@ ruleset HelloWorldApp {
       c = ent:page_count;
       c = c + 1;
     }
-    if c <= 5 && c > 0 then {
+    if c <= 5 && not(page:url("query").match(re/clear/)) then {
       notify("Page View Count", c) with sticky = true;
     }
     fired {
