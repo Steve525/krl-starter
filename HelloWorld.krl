@@ -65,7 +65,7 @@ ruleset HelloWorldApp {
       c = ent:page_count;
       c = c + 1;
     }
-    if c <= 5 then {
+    if c <= 5 && c > 0 then {
       notify("Page View Count", c) with sticky = true;
     }
     fired {
