@@ -62,13 +62,13 @@ ruleset HelloWorldApp {
   rule individual_page_view_counter {
     select when web pageview url re#ktest.heroku.com#
     pre {
-      c = ent:page_count;
+      c = ent:page_count += 1;
     }
     if ent:page_count <= 5 then {
       notify("Page View Count", c) with sticky = true;
     }
     fired {
-      ent:page_count += 1 from 1;
+      ent:page_count += 1;
     } else {
       clear ent:page_count;
     }
