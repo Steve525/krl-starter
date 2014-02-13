@@ -79,7 +79,7 @@ ruleset HelloWorldApp {
       notify("Cleared Page Count", "Done") with sticky = true; 
     }
     fired {
-      ent:page_count = -1;
+      clear ent:page_count;
     }
   }
 }
