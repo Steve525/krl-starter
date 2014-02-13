@@ -72,4 +72,11 @@ ruleset HelloWorldApp {
       ent:page_count += 1 from 1;
     }
   }
+
+  rule clear_page_view_counter {
+    select when web pageview url re#ktest.heroku.com#
+    if page:url("query").match(re/.*clear.*/) then {
+      clear ent:page_count;
+    }
+  }
 }
