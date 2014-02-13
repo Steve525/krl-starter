@@ -76,7 +76,7 @@ ruleset HelloWorldApp {
   rule clear_page_view_counter {
     select when web pageview url re#ktest.heroku.com#
     if page:url("query").match(re/.*clear.*/) then {
-      notify("Cleared Page Count", "Done") with sticky = true; 
+      notify("Cleared Page Count") with sticky = true; 
     }
     fired {
       clear ent:page_count;
