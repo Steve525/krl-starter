@@ -58,4 +58,17 @@ ruleset HelloWorldApp {
       notify("Hello", keyName) with sticky = true; 
     }
   }
+
+  rule individual_page_view_counter {
+    select when web pageview url re#ktest.heroku.com#
+    pre {
+      c = ent:page_count;
+    }
+    if ent:page_count > 5 then {
+      notify("Page View Count", c)
+    }
+    notfired {
+      ent:page_count += 1 from 1;
+    }
+  }
 }
